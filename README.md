@@ -1,40 +1,13 @@
-# dwl - dwm for Wayland
+# dawus - David's awesome wayland using software
 
-Join us on our [Discord server](https://discord.gg/jJxZnrGPWN)!
+## Disclaimer
+This project is based on [djpohly/dwl](https://github.com/djpohly/dwl) and serves as a learning resource for me.
 
-dwl is a compact, hackable compositor for Wayland based on [wlroots](https://github.com/swaywm/wlroots). It is intended to fill the same space in the Wayland world that dwm does in X11, primarily in terms of philosophy, and secondarily in terms of functionality. Like dwm, dwl is:
-
-- Easy to understand, hack on, and extend with patches
-- One C source file (or a very small number) configurable via `config.h`
-- Limited to 2000 SLOC to promote hackability
-- Tied to as few external dependencies as possible
-
-dwl is not meant to provide every feature under the sun. Instead, like dwm, it sticks to features which are necessary, simple, and straightforward to implement given the base on which it is built. Implemented default features are:
-
-- Any features provided by dwm/Xlib: simple window borders, tags, keybindings, client rules, mouse move/resize. Providing a built-in status bar is an exception to this goal, to avoid dependencies on font rendering and/or drawing libraries when an external bar could work well.
-- Configurable multi-monitor layout support, including position and rotation
-- Configurable HiDPI/multi-DPI support
-- Provide information to external status bars via stdout/stdin
-- Urgency hints via xdg-activate protocol
-- Various Wayland protocols
-- XWayland support as provided by wlroots (can be enabled in `config.mk`)
-- Zero flickering - Wayland users naturally expect that "every frame is perfect"
-
-Features under consideration (possibly as patches) are:
-
-- Protocols made trivial by wlroots
-- Implement the input-inhibitor protocol to support screen lockers
-- Implement the idle-inhibit protocol which lets applications such as mpv disable idle monitoring
-- Layer shell popups (used by Waybar)
-- Basic yes/no damage tracking to avoid needless redraws
-- More in-depth damage region tracking ([which may improve power usage](https://mozillagfx.wordpress.com/2019/10/22/dramatically-reduced-power-usage-in-firefox-70-on-macos-with-core-animation/))
-- Implement the text-input and input-method protocols to support IME once ibus implements input-method v2 (see https://github.com/ibus/ibus/pull/2256 and https://github.com/djpohly/dwl/pull/12)
-
-Feature *non-goals* for the main codebase include:
-
-- Client-side decoration (any more than is necessary to tell the clients not to)
-- Client-initiated window management, such as move, resize, and close, which can be done through the compositor
-- Animations and visual effects
+## Goals
+My goals for this project are:
+- understanding what dwl does
+- implementing some quality of life features
+- lua configuration and runtime interop for a lua client AwesomeWM style? (This might be a bit ambiguous but hey this project is mainly for educational purposes anyway :) )
 
 ## Building dwl
 
