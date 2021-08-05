@@ -1,6 +1,6 @@
 dwl
-*.o
-*-protocol.c
-*-protocol.h
+obj
+src/*-protocol.c
+include/*-protocol.h
 .ccls-cache
 #config.h
