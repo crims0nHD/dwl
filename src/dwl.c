@@ -2,7 +2,6 @@
  * See LICENSE file for copyright and license details.
  */
 #define _POSIX_C_SOURCE 200809L
-#include <getopt.h>
 
 #include <linux/input-event-codes.h>
 
@@ -50,25 +49,8 @@
 #include <wlr/xwayland.h>
 #endif
 
-/* macros */
-#define BARF(fmt, ...)                                                         \
-  do {                                                                         \
-    fprintf(stderr, fmt "\n", ##__VA_ARGS__);                                  \
-    exit(EXIT_FAILURE);                                                        \
-  } while (0)
-#define EBARF(fmt, ...) BARF(fmt ": %s", ##__VA_ARGS__, strerror(errno))
-#define MAX(A, B) ((A) > (B) ? (A) : (B))
-#define MIN(A, B) ((A) < (B) ? (A) : (B))
-#define CLEANMASK(mask) (mask & ~WLR_MODIFIER_CAPS)
-#define VISIBLEON(C, M)                                                        \
-  ((C)->mon == (M) && ((C)->tags & (M)->tagset[(M)->seltags]))
-#define LENGTH(X) (sizeof X / sizeof X[0])
-#define END(A) ((A) + LENGTH(A))
-#define TAGMASK ((1 << LENGTH(tags)) - 1)
-#define ROUND(X) ((int)((X) + 0.5))
-#define LISTEN(E, L, H) wl_signal_add((E), ((L)->notify = (H), (L)))
-
 #include "functions.h"
+#include "macros.h"
 #include "types.h"
 
 typedef struct {
@@ -2201,29 +2183,3 @@ Client *xytoindependent(double x, double y) {
   return NULL;
 }
 #endif
-
-int main(int argc, char *argv[]) {
-  char *startup_cmd = NULL;
-  int c;
-
-  while ((c = getopt(argc, argv, "s:h")) != -1) {
-    if (c == 's')
-      startup_cmd = optarg;
-    else
-      goto usage;
-  }
-  if (optind < argc)
-    goto usage;
-
-  // Wayland requires XDG_RUNTIME_DIR for creating its communications
-  // socket
-  if (!getenv("XDG_RUNTIME_DIR"))
-    BARF("XDG_RUNTIME_DIR must be set");
-  setup();
-  run(startup_cmd);
-  cleanup();
-  return EXIT_SUCCESS;
-
-usage:
-  BARF("Usage: %s [-s startup command]", argv[0]);
-}
