@@ -1,4 +1,6 @@
 #pragma once
+#include "functions.h"
+#include "types.h"
 
 /* appearance */
 static const int sloppyfocus = 1;       /* focus follows mouse */
@@ -55,6 +57,7 @@ static const int repeat_delay = 600;
 static const int tap_to_click = 1;
 static const int natural_scrolling = 0;
 
+#include <wlr/types/wlr_keyboard.h>
 #define MODKEY WLR_MODIFIER_LOGO
 #define TAGKEYS(KEY, SKEY, TAG)                                                \
   {MODKEY, KEY, view, {.ui = 1 << TAG}},                                       \
@@ -140,6 +143,7 @@ static const Key keys[] = {
     CHVT(12),
 };
 
+#include <linux/input-event-codes.h>
 static const Button buttons[] = {
     {MODKEY, BTN_LEFT, moveresize, {.ui = CurMove}},
     {MODKEY, BTN_MIDDLE, togglefloating, {0}},
