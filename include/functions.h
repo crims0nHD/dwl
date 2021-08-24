@@ -104,3 +104,15 @@ extern struct wlr_surface *xytolayersurface(struct wl_list *layer_surfaces,
                                             double *sy);
 extern Monitor *xytomon(double x, double y);
 extern void zoom(const Arg *arg);
+
+#ifdef XWAYLAND
+#include <X11/Xlib.h>
+#include <xcb/xcb.h>
+extern void activatex11(struct wl_listener *listener, void *data);
+extern void configurex11(struct wl_listener *listener, void *data);
+extern void createnotifyx11(struct wl_listener *listener, void *data);
+extern Atom getatom(xcb_connection_t *xc, const char *name);
+extern void renderindependents(struct wlr_output *output, struct timespec *now);
+extern void xwaylandready(struct wl_listener *listener, void *data);
+extern Client *xytoindependent(double x, double y);
+#endif // XWAYLAND

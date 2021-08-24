@@ -128,3 +128,33 @@ enum {
 };                                           /* EWMH atoms */
 enum { XDGShell, X11Managed, X11Unmanaged }; /* client types */
 #endif
+
+typedef struct {
+  struct wl_listener request_mode;
+  struct wl_listener destroy;
+} Decoration;
+
+typedef struct {
+  struct wl_list link;
+  struct wlr_input_device *device;
+
+  struct wl_listener modifiers;
+  struct wl_listener key;
+  struct wl_listener destroy;
+} Keyboard;
+
+typedef struct {
+  uint32_t singular_anchor;
+  uint32_t anchor_triplet;
+  int *positive_axis;
+  int *negative_axis;
+  int margin;
+} Edge;
+
+/* Used to move all of the data necessary to render a surface from the top-level
+ * frame handler to the per-surface render function. */
+struct render_data {
+  struct wlr_output *output;
+  struct timespec *when;
+  int x, y; /* layout-relative */
+};

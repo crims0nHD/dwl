@@ -37,5 +37,5 @@ dirs:
 
 workspace: config.h config.mk wayland-scanner.mk dirs include/xdg-shell-protocol.h include/wlr-layer-shell-unstable-v1-protocol.h include/idle-protocol.h
 
-dwl: workspace $(OBJS) obj/xdg-shell-protocol.o obj/wlr-layer-shell-unstable-v1-protocol.o obj/idle-protocol.o obj/dwl.o obj/wallpaper.o
+dwl: $(OBJS) obj/xdg-shell-protocol.o obj/wlr-layer-shell-unstable-v1-protocol.o obj/idle-protocol.o obj/dwl.o obj/wallpaper.o
 	$(CC) $(LDLIBS) -o $@ $^

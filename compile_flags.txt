@@ -1,6 +1,7 @@
 -Iinclude/
 -I.
 -B/usr/include/wlr/render
+-B/usr/include
 -DWLR_USE_UNSTABLE
 -std=c99
 -g
@@ -15,3 +16,4 @@
 -DXWAYLAND
 -I/usr/include/libdrm
 -I/usr/include/pixman-1
+-D_GNU_SOURCE
